@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 420" width="820" height="420" role="img" aria-labelledby="title desc">
+  <title id="title">Удаление узла с двумя детьми через следующий ключ</title>
+  <desc id="desc">Учебная схема: удаление узла с двумя детьми через следующий ключ</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#111"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="820" height="420" fill="#fff"/>
+  <style>
+    .line{stroke:#111;stroke-width:2.2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+    .dash{stroke:#555;stroke-width:2;fill:none;stroke-dasharray:5 5}
+    .node{stroke:#111;stroke-width:2.2;fill:#fff}
+    .hl{fill:#e8f2ff}
+    .new{fill:#dff5e3}
+    .warn{fill:#fff1c7}
+    .red{fill:#d62828;stroke:#111;stroke-width:2.2}
+    .black{fill:#111;stroke:#111;stroke-width:2.2}
+    .ghost{fill:#f5f5f5;stroke:#555;stroke-width:2;stroke-dasharray:5 4}
+    text{font-family:Arial, Helvetica, sans-serif;font-size:18px;fill:#111;text-anchor:middle;dominant-baseline:middle}
+    .small{font-size:14px}
+    .label{font-size:17px}
+    .title{font-size:20px;font-weight:700}
+    .white{fill:#fff}
+    .redText{fill:#b00020;font-weight:700}
+    .greenText{fill:#147a2e;font-weight:700}
+    .muted{fill:#555}
+  </style>
+
+  <text class="title" x="205" y="28">До: у 50 два ребёнка</text>
+  <text class="title" x="615" y="28">После: следующий 60 заменил 50</text>
+  <line class="line" x1="205" y1="82" x2="105" y2="145"/>
+  <line class="line" x1="205" y1="82" x2="305" y2="145"/>
+  <line class="line" x1="105" y1="190" x2="65" y2="252"/>
+  <line class="line" x1="105" y1="190" x2="145" y2="252"/>
+  <line class="line" x1="305" y1="190" x2="265" y2="252"/>
+  <line class="line" x1="305" y1="190" x2="345" y2="252"/>
+  <circle class="node warn" cx="205" cy="70" r="24"/>
+  <text class="" x="205" y="70">50</text>
+  <circle class="node" cx="105" cy="175" r="24"/>
+  <text class="" x="105" y="175">30</text>
+  <circle class="node" cx="305" cy="175" r="24"/>
+  <text class="" x="305" y="175">70</text>
+  <circle class="node" cx="65" cy="270" r="24"/>
+  <text class="" x="65" y="270">20</text>
+  <circle class="node" cx="145" cy="270" r="24"/>
+  <text class="" x="145" y="270">40</text>
+  <circle class="node new" cx="265" cy="270" r="24"/>
+  <text class="" x="265" y="270">60</text>
+  <circle class="node" cx="345" cy="270" r="24"/>
+  <text class="" x="345" y="270">80</text>
+  <path class="line" d="M 287 157 C 254 144, 230 118, 214 91" marker-end="url(#arrow)"/>
+  <text class="greenText" x="302" y="122">следующий = минимум справа</text>
+  <line class="line" x1="615" y1="82" x2="515" y2="145"/>
+  <line class="line" x1="615" y1="82" x2="715" y2="145"/>
+  <line class="line" x1="515" y1="190" x2="475" y2="252"/>
+  <line class="line" x1="515" y1="190" x2="555" y2="252"/>
+  <line class="line" x1="715" y1="190" x2="755" y2="252"/>
+  <circle class="node new" cx="615" cy="70" r="24"/>
+  <text class="" x="615" y="70">60</text>
+  <circle class="node" cx="515" cy="175" r="24"/>
+  <text class="" x="515" y="175">30</text>
+  <circle class="node" cx="715" cy="175" r="24"/>
+  <text class="" x="715" y="175">70</text>
+  <circle class="node" cx="475" cy="270" r="24"/>
+  <text class="" x="475" y="270">20</text>
+  <circle class="node" cx="555" cy="270" r="24"/>
+  <text class="" x="555" y="270">40</text>
+  <circle class="node" cx="755" cy="270" r="24"/>
+  <text class="" x="755" y="270">80</text>
+  <text class="small" x="615" y="346">1) копируем 60 в удаляемый узел   2) удаляем прежний 60 как простой случай</text>
+
+</svg>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 390" width="820" height="390" role="img" aria-labelledby="title desc">
+  <title id="title">Right rotation — малый правый поворот</title>
+  <desc id="desc">Учебная схема: Right rotation — малый правый поворот</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#111"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="820" height="390" fill="#fff"/>
+  <style>
+    .line{stroke:#111;stroke-width:2.2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+    .dash{stroke:#555;stroke-width:2;fill:none;stroke-dasharray:5 5}
+    .node{stroke:#111;stroke-width:2.2;fill:#fff}
+    .hl{fill:#e8f2ff}
+    .new{fill:#dff5e3}
+    .warn{fill:#fff1c7}
+    .red{fill:#d62828;stroke:#111;stroke-width:2.2}
+    .black{fill:#111;stroke:#111;stroke-width:2.2}
+    .ghost{fill:#f5f5f5;stroke:#555;stroke-width:2;stroke-dasharray:5 4}
+    text{font-family:Arial, Helvetica, sans-serif;font-size:18px;fill:#111;text-anchor:middle;dominant-baseline:middle}
+    .small{font-size:14px}
+    .label{font-size:17px}
+    .title{font-size:20px;font-weight:700}
+    .white{fill:#fff}
+    .redText{fill:#b00020;font-weight:700}
+    .greenText{fill:#147a2e;font-weight:700}
+    .muted{fill:#555}
+  </style>
+
+  <text class="title" x="205" y="28">До: правый поворот вокруг y</text>
+  <text class="title" x="615" y="28">После: x стал корнем поддерева</text>
+  <line class="line" x1="205" y1="82" x2="115" y2="150"/>
+  <line class="line" x1="205" y1="82" x2="295" y2="150"/>
+  <line class="line" x1="115" y1="195" x2="65" y2="255"/>
+  <line class="line" x1="115" y1="195" x2="165" y2="255"/>
+  <circle class="node warn" cx="205" cy="70" r="24"/>
+  <text class="" x="205" y="70">y</text>
+  <circle class="node hl" cx="115" cy="175" r="24"/>
+  <text class="" x="115" y="175">x</text>
+  <circle class="ghost" cx="295" cy="175" r="22"/>
+  <text class="small" x="295" y="175">T3</text>
+  <circle class="ghost" cx="65" cy="275" r="22"/>
+  <text class="small" x="65" y="275">T1</text>
+  <circle class="ghost" cx="165" cy="275" r="22"/>
+  <text class="small" x="165" y="275">T2</text>
+  <path class="line" d="M 400 175 C 450 120, 500 120, 545 165" marker-end="url(#arrow)"/>
+  <text class="small" x="410" y="105">правый поворот(y)</text>
+  <line class="line" x1="615" y1="82" x2="525" y2="150"/>
+  <line class="line" x1="615" y1="82" x2="705" y2="150"/>
+  <line class="line" x1="705" y1="195" x2="655" y2="255"/>
+  <line class="line" x1="705" y1="195" x2="755" y2="255"/>
+  <circle class="node hl" cx="615" cy="70" r="24"/>
+  <text class="" x="615" y="70">x</text>
+  <circle class="ghost" cx="525" cy="175" r="22"/>
+  <text class="small" x="525" y="175">T1</text>
+  <circle class="node warn" cx="705" cy="175" r="24"/>
+  <text class="" x="705" y="175">y</text>
+  <circle class="ghost" cx="655" cy="275" r="22"/>
+  <text class="small" x="655" y="275">T2</text>
+  <circle class="ghost" cx="755" cy="275" r="22"/>
+  <text class="small" x="755" y="275">T3</text>
+  <text class="small" x="615" y="340">T2 переходит из правого поддерева x в левое поддерево y</text>
+
+</svg>

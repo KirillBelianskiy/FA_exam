@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 400" width="760" height="400" role="img" aria-labelledby="title desc">
+  <title id="title">Tree traversals — preorder, inorder, postorder</title>
+  <desc id="desc">Учебная схема: Tree traversals — preorder, inorder, postorder</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#111"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="760" height="400" fill="#fff"/>
+  <style>
+    .line{stroke:#111;stroke-width:2.2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+    .dash{stroke:#555;stroke-width:2;fill:none;stroke-dasharray:5 5}
+    .node{stroke:#111;stroke-width:2.2;fill:#fff}
+    .hl{fill:#e8f2ff}
+    .new{fill:#dff5e3}
+    .warn{fill:#fff1c7}
+    .red{fill:#d62828;stroke:#111;stroke-width:2.2}
+    .black{fill:#111;stroke:#111;stroke-width:2.2}
+    .ghost{fill:#f5f5f5;stroke:#555;stroke-width:2;stroke-dasharray:5 4}
+    text{font-family:Arial, Helvetica, sans-serif;font-size:18px;fill:#111;text-anchor:middle;dominant-baseline:middle}
+    .small{font-size:14px}
+    .label{font-size:17px}
+    .title{font-size:20px;font-weight:700}
+    .white{fill:#fff}
+    .redText{fill:#b00020;font-weight:700}
+    .greenText{fill:#147a2e;font-weight:700}
+    .muted{fill:#555}
+  </style>
+
+  <text class="title" x="380" y="28">Обходы дерева: порядок посещения вершины и поддеревьев</text>
+  <line class="line" x1="380" y1="82" x2="260" y2="145"/>
+  <line class="line" x1="380" y1="82" x2="500" y2="145"/>
+  <line class="line" x1="260" y1="190" x2="200" y2="252"/>
+  <line class="line" x1="260" y1="190" x2="320" y2="252"/>
+  <line class="line" x1="500" y1="190" x2="440" y2="252"/>
+  <line class="line" x1="500" y1="190" x2="560" y2="252"/>
+  <circle class="node hl" cx="380" cy="70" r="24"/>
+  <text class="" x="380" y="70">A</text>
+  <circle class="node" cx="260" cy="175" r="24"/>
+  <text class="" x="260" y="175">B</text>
+  <circle class="node" cx="500" cy="175" r="24"/>
+  <text class="" x="500" y="175">C</text>
+  <circle class="node" cx="200" cy="270" r="24"/>
+  <text class="" x="200" y="270">D</text>
+  <circle class="node" cx="320" cy="270" r="24"/>
+  <text class="" x="320" y="270">E</text>
+  <circle class="node" cx="440" cy="270" r="24"/>
+  <text class="" x="440" y="270">F</text>
+  <circle class="node" cx="560" cy="270" r="24"/>
+  <text class="" x="560" y="270">G</text>
+  <text class="label" x="160" y="338">Префиксный:  A, B, D, E, C, F, G</text>
+  <text class="label" x="160" y="360">Инфиксный:   D, B, E, A, F, C, G</text>
+  <text class="label" x="160" y="382">Постфиксный: D, E, B, F, G, C, A</text>
+
+</svg>

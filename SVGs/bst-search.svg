@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 390" width="720" height="390" role="img" aria-labelledby="title desc">
+  <title id="title">Поиск ключа в дереве двоичного поиска</title>
+  <desc id="desc">Учебная схема: поиск ключа в дереве двоичного поиска</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#111"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="720" height="390" fill="#fff"/>
+  <style>
+    .line{stroke:#111;stroke-width:2.2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+    .dash{stroke:#555;stroke-width:2;fill:none;stroke-dasharray:5 5}
+    .node{stroke:#111;stroke-width:2.2;fill:#fff}
+    .hl{fill:#e8f2ff}
+    .new{fill:#dff5e3}
+    .warn{fill:#fff1c7}
+    .red{fill:#d62828;stroke:#111;stroke-width:2.2}
+    .black{fill:#111;stroke:#111;stroke-width:2.2}
+    .ghost{fill:#f5f5f5;stroke:#555;stroke-width:2;stroke-dasharray:5 4}
+    text{font-family:Arial, Helvetica, sans-serif;font-size:18px;fill:#111;text-anchor:middle;dominant-baseline:middle}
+    .small{font-size:14px}
+    .label{font-size:17px}
+    .title{font-size:20px;font-weight:700}
+    .white{fill:#fff}
+    .redText{fill:#b00020;font-weight:700}
+    .greenText{fill:#147a2e;font-weight:700}
+    .muted{fill:#555}
+  </style>
+
+  <text class="title" x="360" y="28">Поиск ключа 60 в дереве поиска</text>
+  <line class="line" x1="360" y1="82" x2="220" y2="150"/>
+  <line class="line" x1="360" y1="82" x2="500" y2="150"/>
+  <line class="line" x1="220" y1="194" x2="150" y2="260"/>
+  <line class="line" x1="220" y1="194" x2="290" y2="260"/>
+  <line class="line" x1="500" y1="194" x2="430" y2="260"/>
+  <line class="line" x1="500" y1="194" x2="570" y2="260"/>
+  <circle class="node hl" cx="360" cy="70" r="24"/>
+  <text class="" x="360" y="70">50</text>
+  <circle class="node" cx="220" cy="180" r="24"/>
+  <text class="" x="220" y="180">30</text>
+  <circle class="node hl" cx="500" cy="180" r="24"/>
+  <text class="" x="500" y="180">70</text>
+  <circle class="node" cx="150" cy="285" r="24"/>
+  <text class="" x="150" y="285">20</text>
+  <circle class="node" cx="290" cy="285" r="24"/>
+  <text class="" x="290" y="285">40</text>
+  <circle class="node new" cx="430" cy="285" r="24"/>
+  <text class="" x="430" y="285">60</text>
+  <circle class="node" cx="570" cy="285" r="24"/>
+  <text class="" x="570" y="285">80</text>
+  <path class="line" d="M 395 78 C 445 92, 478 122, 494 151" marker-end="url(#arrow)"/>
+  <path class="line" d="M 489 199 C 470 224, 452 246, 435 262" marker-end="url(#arrow)"/>
+  <text class="small" x="455" y="103">60 &gt; 50: вправо</text>
+  <text class="small" x="506" y="238">60 &lt; 70: влево</text>
+  <text class="greenText" x="430" y="334">нашли 60</text>
+
+</svg>

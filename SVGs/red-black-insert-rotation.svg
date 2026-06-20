@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 430" width="900" height="430" role="img" aria-labelledby="title desc">
+  <title id="title">Red-Black insert rotation case — чёрный дядя и поворот</title>
+  <desc id="desc">Учебная схема: Red-Black insert rotation case — чёрный дядя и поворот</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#111"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="900" height="430" fill="#fff"/>
+  <style>
+    .line{stroke:#111;stroke-width:2.2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+    .dash{stroke:#555;stroke-width:2;fill:none;stroke-dasharray:5 5}
+    .node{stroke:#111;stroke-width:2.2;fill:#fff}
+    .hl{fill:#e8f2ff}
+    .new{fill:#dff5e3}
+    .warn{fill:#fff1c7}
+    .red{fill:#d62828;stroke:#111;stroke-width:2.2}
+    .black{fill:#111;stroke:#111;stroke-width:2.2}
+    .ghost{fill:#f5f5f5;stroke:#555;stroke-width:2;stroke-dasharray:5 4}
+    text{font-family:Arial, Helvetica, sans-serif;font-size:18px;fill:#111;text-anchor:middle;dominant-baseline:middle}
+    .small{font-size:14px}
+    .label{font-size:17px}
+    .title{font-size:20px;font-weight:700}
+    .white{fill:#fff}
+    .redText{fill:#b00020;font-weight:700}
+    .greenText{fill:#147a2e;font-weight:700}
+    .muted{fill:#555}
+  </style>
+
+  <text class="title" x="225" y="28">До: дядя чёрный, линия LL</text>
+  <text class="title" x="675" y="28">После: поворот + перекраска</text>
+  <line class="line" x1="225" y1="82" x2="125" y2="150"/>
+  <line class="line" x1="225" y1="82" x2="325" y2="150"/>
+  <line class="line" x1="125" y1="195" x2="75" y2="255"/>
+  <circle class="black" cx="225" cy="70" r="24"/>
+  <text class="white" x="225" y="70">G</text>
+  <circle class="red" cx="125" cy="175" r="24"/>
+  <text class="white" x="125" y="175">P</text>
+  <circle class="black" cx="325" cy="175" r="24"/>
+  <text class="white" x="325" y="175">U</text>
+  <circle class="red" cx="75" cy="275" r="24"/>
+  <text class="white" x="75" y="275">N</text>
+  <text class="redText" x="210" y="330">N и P красные: нужен правый поворот(G)</text>
+  <path class="line" d="M 395 180 C 470 120, 540 120, 605 168" marker-end="url(#arrow)"/>
+  <line class="line" x1="675" y1="82" x2="575" y2="150"/>
+  <line class="line" x1="675" y1="82" x2="775" y2="150"/>
+  <circle class="black" cx="675" cy="70" r="24"/>
+  <text class="white" x="675" y="70">P</text>
+  <circle class="red" cx="575" cy="175" r="24"/>
+  <text class="white" x="575" y="175">N</text>
+  <circle class="red" cx="775" cy="175" r="24"/>
+  <text class="white" x="775" y="175">G</text>
+  <text class="greenText" x="675" y="330">P стал чёрным корнем поддерева, G стал красным</text>
+
+</svg>

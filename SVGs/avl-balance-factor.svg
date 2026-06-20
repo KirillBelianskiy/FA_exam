@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 370" width="720" height="370" role="img" aria-labelledby="title desc">
+  <title id="title">AVL balance factor — фактор баланса</title>
+  <desc id="desc">Учебная схема: AVL balance factor — фактор баланса</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#111"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="720" height="370" fill="#fff"/>
+  <style>
+    .line{stroke:#111;stroke-width:2.2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+    .dash{stroke:#555;stroke-width:2;fill:none;stroke-dasharray:5 5}
+    .node{stroke:#111;stroke-width:2.2;fill:#fff}
+    .hl{fill:#e8f2ff}
+    .new{fill:#dff5e3}
+    .warn{fill:#fff1c7}
+    .red{fill:#d62828;stroke:#111;stroke-width:2.2}
+    .black{fill:#111;stroke:#111;stroke-width:2.2}
+    .ghost{fill:#f5f5f5;stroke:#555;stroke-width:2;stroke-dasharray:5 4}
+    text{font-family:Arial, Helvetica, sans-serif;font-size:18px;fill:#111;text-anchor:middle;dominant-baseline:middle}
+    .small{font-size:14px}
+    .label{font-size:17px}
+    .title{font-size:20px;font-weight:700}
+    .white{fill:#fff}
+    .redText{fill:#b00020;font-weight:700}
+    .greenText{fill:#147a2e;font-weight:700}
+    .muted{fill:#555}
+  </style>
+
+  <text class="title" x="360" y="28">AVL: balance factor = h(left) - h(right)</text>
+  <line class="line" x1="360" y1="82" x2="220" y2="150"/>
+  <line class="line" x1="360" y1="82" x2="500" y2="150"/>
+  <line class="line" x1="220" y1="198" x2="160" y2="255"/>
+  <line class="line" x1="220" y1="198" x2="280" y2="255"/>
+  <line class="line" x1="160" y1="300" x2="120" y2="340"/>
+  <circle class="node hl" cx="360" cy="70" r="31"/>
+  <text class="small" x="360" y="70"><tspan x="360" y="62">50</tspan><tspan x="360" y="78">бал=1</tspan></text>
+  <circle class="node" cx="220" cy="175" r="31"/>
+  <text class="small" x="220" y="175"><tspan x="220" y="167">30</tspan><tspan x="220" y="183">h=3</tspan></text>
+  <circle class="node" cx="500" cy="175" r="31"/>
+  <text class="small" x="500" y="175"><tspan x="500" y="167">70</tspan><tspan x="500" y="183">h=2</tspan></text>
+  <circle class="node" cx="160" cy="275" r="24"/>
+  <text class="" x="160" y="275">20</text>
+  <circle class="node" cx="280" cy="275" r="24"/>
+  <text class="" x="280" y="275">40</text>
+  <circle class="node" cx="120" cy="350" r="24"/>
+  <text class="" x="120" y="350">10</text>
+  <text class="label" x="545" y="275">BF(50)=3-2=1</text>
+  <text class="label" x="545" y="299">AVL требует BF ∈ {-1,0,1}</text>
+  <text class="label" x="545" y="323">если |BF|=2 — нужен поворот</text>
+
+</svg>

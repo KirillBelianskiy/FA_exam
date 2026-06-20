@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 360" width="780" height="360" role="img" aria-labelledby="title desc">
+  <title id="title">Удаление узла с одним ребёнком в дереве двоичного поиска</title>
+  <desc id="desc">Учебная схема: удаление узла с одним ребёнком в дереве двоичного поиска</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#111"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="780" height="360" fill="#fff"/>
+  <style>
+    .line{stroke:#111;stroke-width:2.2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+    .dash{stroke:#555;stroke-width:2;fill:none;stroke-dasharray:5 5}
+    .node{stroke:#111;stroke-width:2.2;fill:#fff}
+    .hl{fill:#e8f2ff}
+    .new{fill:#dff5e3}
+    .warn{fill:#fff1c7}
+    .red{fill:#d62828;stroke:#111;stroke-width:2.2}
+    .black{fill:#111;stroke:#111;stroke-width:2.2}
+    .ghost{fill:#f5f5f5;stroke:#555;stroke-width:2;stroke-dasharray:5 4}
+    text{font-family:Arial, Helvetica, sans-serif;font-size:18px;fill:#111;text-anchor:middle;dominant-baseline:middle}
+    .small{font-size:14px}
+    .label{font-size:17px}
+    .title{font-size:20px;font-weight:700}
+    .white{fill:#fff}
+    .redText{fill:#b00020;font-weight:700}
+    .greenText{fill:#147a2e;font-weight:700}
+    .muted{fill:#555}
+  </style>
+
+  <text class="title" x="195" y="28">До: у 30 один ребёнок</text>
+  <text class="title" x="585" y="28">После: ребёнок поднят к родителю</text>
+  <line class="line" x1="195" y1="82" x2="105" y2="145"/>
+  <line class="line" x1="195" y1="82" x2="285" y2="145"/>
+  <line class="line" x1="105" y1="190" x2="145" y2="252"/>
+  <circle class="node" cx="195" cy="70" r="24"/>
+  <text class="" x="195" y="70">50</text>
+  <circle class="node warn" cx="105" cy="175" r="24"/>
+  <text class="" x="105" y="175">30</text>
+  <circle class="node" cx="285" cy="175" r="24"/>
+  <text class="" x="285" y="175">70</text>
+  <circle class="node new" cx="145" cy="270" r="24"/>
+  <text class="" x="145" y="270">40</text>
+  <text class="small" x="104" y="225">нет левого</text>
+  <line class="line" x1="585" y1="82" x2="495" y2="145"/>
+  <line class="line" x1="585" y1="82" x2="675" y2="145"/>
+  <circle class="node" cx="585" cy="70" r="24"/>
+  <text class="" x="585" y="70">50</text>
+  <circle class="node new" cx="495" cy="175" r="24"/>
+  <text class="" x="495" y="175">40</text>
+  <circle class="node" cx="675" cy="175" r="24"/>
+  <text class="" x="675" y="175">70</text>
+  <path class="line" d="M 355 175 C 415 120, 450 120, 500 158" marker-end="url(#arrow)"/>
+  <text class="small" x="390" y="105">замена 30 на 40</text>
+
+</svg>

@@ -333,17 +333,17 @@ public sealed class BetterBigInteger
 
     public static BetterBigInteger operator &(BetterBigInteger left, BetterBigInteger right)
     {
-        return ApplyBitwise(left, right, '&');
+        return ApplyBitwise(left, right, (leftWord, rightWord) => leftWord & rightWord);
     }
 
     public static BetterBigInteger operator |(BetterBigInteger left, BetterBigInteger right)
     {
-        return ApplyBitwise(left, right, '|');
+        return ApplyBitwise(left, right, (leftWord, rightWord) => leftWord | rightWord);
     }
 
     public static BetterBigInteger operator ^(BetterBigInteger left, BetterBigInteger right)
     {
-        return ApplyBitwise(left, right, '^');
+        return ApplyBitwise(left, right, (leftWord, rightWord) => leftWord ^ rightWord);
     }
 
     public static BetterBigInteger operator <<(BetterBigInteger value, int shift)
@@ -538,10 +538,17 @@ public sealed class BetterBigInteger
         remainder = TrimMagnitude(currentRemainder);
     }
 
-    private static BetterBigInteger ApplyBitwise(BetterBigInteger left, BetterBigInteger right, char operation)
+    private static BetterBigInteger ApplyBitwise(
+        BetterBigInteger left,
+        BetterBigInteger right,
+        Func<uint, uint, uint> operation)
     {
         ValidateOperand(left, nameof(left));
         ValidateOperand(right, nameof(right));
+        if (operation is null)
+        {
+            throw new ArgumentNullException(nameof(operation));
+        }
 
         int length = Math.Max(left.GetSignedWordLength(), right.GetSignedWordLength()) + 1;
         uint[] leftWords = left.ToTwosComplement(length);
@@ -550,18 +557,7 @@ public sealed class BetterBigInteger
 
         for (int i = 0; i < result.Length; i++)
         {
-            if (operation == '&')
-            {
-                result[i] = leftWords[i] & rightWords[i];
-            }
-            else if (operation == '|')
-            {
-                result[i] = leftWords[i] | rightWords[i];
-            }
-            else
-            {
-                result[i] = leftWords[i] ^ rightWords[i];
-            }
+            result[i] = operation(leftWords[i], rightWords[i]);
         }
 
         return FromTwosComplement(result);
@@ -797,7 +793,7 @@ public sealed class BetterBigInteger
     {
         if (shift == 0 || IsZeroMagnitude(value))
         {
-            return value.ToArray();
+            return TrimMagnitude(value.ToArray());
         }
 
         int wordShift = shift / 32;

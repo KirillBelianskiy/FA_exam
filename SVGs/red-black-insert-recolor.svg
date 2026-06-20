@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 420" width="860" height="420" role="img" aria-labelledby="title desc">
+  <title id="title">Red-Black insert recolor case — красный дядя</title>
+  <desc id="desc">Учебная схема: Red-Black insert recolor case — красный дядя</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#111"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="860" height="420" fill="#fff"/>
+  <style>
+    .line{stroke:#111;stroke-width:2.2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+    .dash{stroke:#555;stroke-width:2;fill:none;stroke-dasharray:5 5}
+    .node{stroke:#111;stroke-width:2.2;fill:#fff}
+    .hl{fill:#e8f2ff}
+    .new{fill:#dff5e3}
+    .warn{fill:#fff1c7}
+    .red{fill:#d62828;stroke:#111;stroke-width:2.2}
+    .black{fill:#111;stroke:#111;stroke-width:2.2}
+    .ghost{fill:#f5f5f5;stroke:#555;stroke-width:2;stroke-dasharray:5 4}
+    text{font-family:Arial, Helvetica, sans-serif;font-size:18px;fill:#111;text-anchor:middle;dominant-baseline:middle}
+    .small{font-size:14px}
+    .label{font-size:17px}
+    .title{font-size:20px;font-weight:700}
+    .white{fill:#fff}
+    .redText{fill:#b00020;font-weight:700}
+    .greenText{fill:#147a2e;font-weight:700}
+    .muted{fill:#555}
+  </style>
+
+  <text class="title" x="215" y="28">До: родитель и дядя красные</text>
+  <text class="title" x="645" y="28">После: recolor и проверка выше</text>
+  <line class="line" x1="215" y1="82" x2="125" y2="150"/>
+  <line class="line" x1="215" y1="82" x2="305" y2="150"/>
+  <line class="line" x1="125" y1="195" x2="75" y2="255"/>
+  <circle class="black" cx="215" cy="70" r="24"/>
+  <text class="white" x="215" y="70">G</text>
+  <circle class="red" cx="125" cy="175" r="24"/>
+  <text class="white" x="125" y="175">P</text>
+  <circle class="red" cx="305" cy="175" r="24"/>
+  <text class="white" x="305" y="175">U</text>
+  <circle class="red" cx="75" cy="275" r="24"/>
+  <text class="white" x="75" y="275">N</text>
+  <text class="redText" x="215" y="330">Нарушение: красный P имеет красного N</text>
+  <path class="line" d="M 390 180 C 450 130, 500 130, 555 170" marker-end="url(#arrow)"/>
+  <text class="small" x="430" y="110">перекраска</text>
+  <line class="line" x1="645" y1="82" x2="555" y2="150"/>
+  <line class="line" x1="645" y1="82" x2="735" y2="150"/>
+  <line class="line" x1="555" y1="195" x2="505" y2="255"/>
+  <circle class="red" cx="645" cy="70" r="24"/>
+  <text class="white" x="645" y="70">G</text>
+  <circle class="black" cx="555" cy="175" r="24"/>
+  <text class="white" x="555" y="175">P</text>
+  <circle class="black" cx="735" cy="175" r="24"/>
+  <text class="white" x="735" y="175">U</text>
+  <circle class="red" cx="505" cy="275" r="24"/>
+  <text class="white" x="505" y="275">N</text>
+  <text class="greenText" x="645" y="330">P и U стали чёрными, G стал красным</text>
+
+</svg>
