@@ -14,7 +14,13 @@ public abstract class BinarySearchTreeBase<TKey, TValue, TNode> : IEnumerable<Tr
 
     public int Count { get; protected set; }
 
-    public bool IsEmpty => Count == 0;
+    public bool IsEmpty
+    {
+        get
+        {
+            return Count == 0;
+        }
+    }
 
     protected TNode? Root { get; set; }
 
@@ -47,7 +53,14 @@ public abstract class BinarySearchTreeBase<TKey, TValue, TNode> : IEnumerable<Tr
                 return false;
             }
 
-            current = compareResult < 0 ? current.Left : current.Right;
+            if (compareResult < 0)
+            {
+                current = current.Left;
+            }
+            else
+            {
+                current = current.Right;
+            }
         }
 
         TNode newNode = CreateNode(key, value);
@@ -110,7 +123,13 @@ public abstract class BinarySearchTreeBase<TKey, TValue, TNode> : IEnumerable<Tr
 
     public TValue GetValueOrDefault(TKey key, TValue defaultValue = default!)
     {
-        return TryGetValue(key, out TValue value) ? value : defaultValue;
+        TValue value;
+        if (TryGetValue(key, out value))
+        {
+            return value;
+        }
+
+        return defaultValue;
     }
 
     public bool Update(TKey key, TValue value)
@@ -156,6 +175,21 @@ public abstract class BinarySearchTreeBase<TKey, TValue, TNode> : IEnumerable<Tr
         return true;
     }
 
+    public IEnumerable<TreeEntry<TKey, TValue>> FindRange(TKey minKey, TKey maxKey)
+    {
+        ValidateKey(minKey);
+        ValidateKey(maxKey);
+
+        if (Compare(minKey, maxKey) > 0)
+        {
+            throw new ArgumentException("Minimum key must be less than or equal to maximum key.");
+        }
+
+        List<TNode> nodes = new List<TNode>();
+        AddRangeNodes(Root, minKey, maxKey, nodes);
+        return new TreeIterator(nodes);
+    }
+
     public void Clear()
     {
         Root = null;
@@ -164,7 +198,7 @@ public abstract class BinarySearchTreeBase<TKey, TValue, TNode> : IEnumerable<Tr
 
     public TreeEntry<TKey, TValue>[] ToArray(TreeTraversal traversal = TreeTraversal.InOrder)
     {
-        List<TreeEntry<TKey, TValue>> result = new();
+        List<TreeEntry<TKey, TValue>> result = new List<TreeEntry<TKey, TValue>>();
         foreach (TreeEntry<TKey, TValue> item in Traverse(traversal))
         {
             result.Add(item);
@@ -222,7 +256,12 @@ public abstract class BinarySearchTreeBase<TKey, TValue, TNode> : IEnumerable<Tr
 
     protected static int GetHeight(TNode? node)
     {
-        return node?.Height ?? 0;
+        if (node is null)
+        {
+            return 0;
+        }
+
+        return node.Height;
     }
 
     protected int GetBalanceFactor(TNode node)
@@ -254,7 +293,14 @@ public abstract class BinarySearchTreeBase<TKey, TValue, TNode> : IEnumerable<Tr
                 return current;
             }
 
-            current = compareResult < 0 ? current.Left : current.Right;
+            if (compareResult < 0)
+            {
+                current = current.Left;
+            }
+            else
+            {
+                current = current.Right;
+            }
         }
 
         return null;
@@ -445,6 +491,32 @@ public abstract class BinarySearchTreeBase<TKey, TValue, TNode> : IEnumerable<Tr
         return DoubleRightRotation(node);
     }
 
+    private void AddRangeNodes(TNode? node, TKey minKey, TKey maxKey, List<TNode> nodes)
+    {
+        if (node is null)
+        {
+            return;
+        }
+
+        int compareWithMin = Compare(node.Key, minKey);
+        int compareWithMax = Compare(node.Key, maxKey);
+
+        if (compareWithMin > 0)
+        {
+            AddRangeNodes(node.Left, minKey, maxKey, nodes);
+        }
+
+        if (compareWithMin >= 0 && compareWithMax <= 0)
+        {
+            nodes.Add(node);
+        }
+
+        if (compareWithMax <= 0)
+        {
+            AddRangeNodes(node.Right, minKey, maxKey, nodes);
+        }
+    }
+
     private static void ValidateKey(TKey key)
     {
         if (key is null)
@@ -458,6 +530,7 @@ public abstract class BinarySearchTreeBase<TKey, TValue, TNode> : IEnumerable<Tr
         private readonly TNode? _root;
         private readonly TreeTraversal _traversal;
         private readonly List<TNode> _nodes;
+        private readonly bool _usePreparedNodes;
         private int _position;
 
         public TreeIterator(TNode? root, TreeTraversal traversal)
@@ -465,6 +538,7 @@ public abstract class BinarySearchTreeBase<TKey, TValue, TNode> : IEnumerable<Tr
             _root = root;
             _traversal = traversal;
             _nodes = new List<TNode>();
+            _usePreparedNodes = false;
             _position = -1;
             BuildNodeList(root);
         }
@@ -483,7 +557,22 @@ public abstract class BinarySearchTreeBase<TKey, TValue, TNode> : IEnumerable<Tr
             }
         }
 
-        object IEnumerator.Current => Current;
+        object IEnumerator.Current
+        {
+            get
+            {
+                return Current;
+            }
+        }
+
+        public TreeIterator(List<TNode> nodes)
+        {
+            _root = null;
+            _traversal = TreeTraversal.InOrder;
+            _nodes = nodes;
+            _usePreparedNodes = true;
+            _position = -1;
+        }
 
         public bool MoveNext()
         {
@@ -503,6 +592,11 @@ public abstract class BinarySearchTreeBase<TKey, TValue, TNode> : IEnumerable<Tr
 
         public IEnumerator<TreeEntry<TKey, TValue>> GetEnumerator()
         {
+            if (_usePreparedNodes)
+            {
+                return new TreeIterator(_nodes);
+            }
+
             return new TreeIterator(_root, _traversal);
         }
 

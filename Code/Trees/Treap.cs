@@ -5,19 +5,30 @@ public class Treap<TKey, TValue> : BinarySearchTreeBase<TKey, TValue, TreapNode<
     private readonly Func<int> _priorityGenerator;
 
     public Treap(IComparer<TKey>? comparer = null)
-        : this(() => Random.Shared.Next(), comparer)
+        : this(new Random(), comparer)
     {
     }
 
     public Treap(Random random, IComparer<TKey>? comparer = null)
-        : this(random is null ? throw new ArgumentNullException(nameof(random)) : random.Next, comparer)
+        : base(comparer)
     {
+        if (random is null)
+        {
+            throw new ArgumentNullException(nameof(random));
+        }
+
+        _priorityGenerator = random.Next;
     }
 
     public Treap(Func<int> priorityGenerator, IComparer<TKey>? comparer = null)
         : base(comparer)
     {
-        _priorityGenerator = priorityGenerator ?? throw new ArgumentNullException(nameof(priorityGenerator));
+        if (priorityGenerator is null)
+        {
+            throw new ArgumentNullException(nameof(priorityGenerator));
+        }
+
+        _priorityGenerator = priorityGenerator;
     }
 
     protected override TreapNode<TKey, TValue> CreateNode(TKey key, TValue value)
@@ -42,7 +53,10 @@ public class Treap<TKey, TValue> : BinarySearchTreeBase<TKey, TValue, TreapNode<
 
     public override bool Remove(TKey key)
     {
-        ArgumentNullException.ThrowIfNull(key);
+        if (key is null)
+        {
+            throw new ArgumentNullException(nameof(key));
+        }
 
         TreapNode<TKey, TValue>? node = FindNode(key, out TreapNode<TKey, TValue>? lastVisited);
         if (node is null)

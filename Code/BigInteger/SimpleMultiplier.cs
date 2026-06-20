@@ -9,7 +9,7 @@ public sealed class SimpleMultiplier : IMultiplier
 
         if (IsZero(left) || IsZero(right))
         {
-            return [0];
+            return new uint[] { 0 };
         }
 
         uint[] result = new uint[left.Length + right.Length];
@@ -42,7 +42,7 @@ public sealed class SimpleMultiplier : IMultiplier
     {
         if (digits.Length == 0)
         {
-            return [0];
+            return new uint[] { 0 };
         }
 
         int length = digits.Length;

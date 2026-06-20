@@ -33,7 +33,10 @@ public class SplayTree<TKey, TValue>
 
     public override bool Remove(TKey key)
     {
-        ArgumentNullException.ThrowIfNull(key);
+        if (key is null)
+        {
+            throw new ArgumentNullException(nameof(key));
+        }
 
         SplayTreeNode<TKey, TValue>? node = FindNode(key, out SplayTreeNode<TKey, TValue>? lastVisited);
         if (node is null)

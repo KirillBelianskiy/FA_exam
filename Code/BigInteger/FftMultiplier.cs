@@ -15,7 +15,7 @@ public sealed class FftMultiplier : IMultiplier
 
         if (IsZero(left) || IsZero(right))
         {
-            return [0];
+            return new uint[] { 0 };
         }
 
         double[] leftChunks = ToChunks(left);
@@ -39,15 +39,15 @@ public sealed class FftMultiplier : IMultiplier
             fb[i] = new Complex(rightChunks[i], 0);
         }
 
-        Fft(fa, invert: false);
-        Fft(fb, invert: false);
+        Fft(fa, false);
+        Fft(fb, false);
 
         for (int i = 0; i < size; i++)
         {
             fa[i] *= fb[i];
         }
 
-        Fft(fa, invert: true);
+        Fft(fa, true);
 
         ulong carry = 0;
         uint[] chunks = new uint[size + 1];
@@ -113,14 +113,16 @@ public sealed class FftMultiplier : IMultiplier
 
             if (i < j)
             {
-                (values[i], values[j]) = (values[j], values[i]);
+                Complex temp = values[i];
+                values[i] = values[j];
+                values[j] = temp;
             }
         }
 
         for (int length = 2; length <= n; length <<= 1)
         {
             double angle = TwoPi / length * (invert ? -1 : 1);
-            Complex root = new(Math.Cos(angle), Math.Sin(angle));
+            Complex root = new Complex(Math.Cos(angle), Math.Sin(angle));
 
             for (int i = 0; i < n; i += length)
             {

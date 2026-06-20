@@ -4,7 +4,7 @@ public sealed class KaratsubaMultiplier : IMultiplier
 {
     private const int SimpleThreshold = 32;
 
-    private readonly SimpleMultiplier _simpleMultiplier = new();
+    private readonly SimpleMultiplier _simpleMultiplier = new SimpleMultiplier();
 
     public uint[] Multiply(uint[] left, uint[] right)
     {
@@ -13,7 +13,7 @@ public sealed class KaratsubaMultiplier : IMultiplier
 
         if (IsZero(left) || IsZero(right))
         {
-            return [0];
+            return new uint[] { 0 };
         }
 
         return SimpleMultiplier.Trim(MultiplyCore(left, right));
@@ -26,7 +26,7 @@ public sealed class KaratsubaMultiplier : IMultiplier
 
         if (left.Length == 0 || right.Length == 0)
         {
-            return [0];
+            return new uint[] { 0 };
         }
 
         if (Math.Min(left.Length, right.Length) <= SimpleThreshold)
@@ -36,10 +36,10 @@ public sealed class KaratsubaMultiplier : IMultiplier
 
         int split = Math.Max(left.Length, right.Length) / 2;
 
-        ReadOnlySpan<uint> lowLeft = left[..Math.Min(split, left.Length)];
-        ReadOnlySpan<uint> highLeft = left.Length > split ? left[split..] : ReadOnlySpan<uint>.Empty;
-        ReadOnlySpan<uint> lowRight = right[..Math.Min(split, right.Length)];
-        ReadOnlySpan<uint> highRight = right.Length > split ? right[split..] : ReadOnlySpan<uint>.Empty;
+        ReadOnlySpan<uint> lowLeft = left.Slice(0, Math.Min(split, left.Length));
+        ReadOnlySpan<uint> highLeft = left.Length > split ? left.Slice(split) : ReadOnlySpan<uint>.Empty;
+        ReadOnlySpan<uint> lowRight = right.Slice(0, Math.Min(split, right.Length));
+        ReadOnlySpan<uint> highRight = right.Length > split ? right.Slice(split) : ReadOnlySpan<uint>.Empty;
 
         uint[] z0 = MultiplyCore(lowLeft, lowRight);
         uint[] z2 = MultiplyCore(highLeft, highRight);
@@ -65,7 +65,7 @@ public sealed class KaratsubaMultiplier : IMultiplier
             length--;
         }
 
-        return digits[..length];
+        return digits.Slice(0, length);
     }
 
     private static uint[] AddAbs(ReadOnlySpan<uint> left, ReadOnlySpan<uint> right)

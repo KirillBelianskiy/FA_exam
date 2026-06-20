@@ -7,14 +7,18 @@ public static class MultiplierPerformanceDemo
 {
     public static void Run(TextWriter output, int wordCount = 2048)
     {
-        ArgumentNullException.ThrowIfNull(output);
+        if (output == null)
+        {
+            throw new ArgumentNullException(nameof(output));
+        }
+
         if (wordCount <= 0)
         {
             throw new ArgumentOutOfRangeException(nameof(wordCount));
         }
 
-        uint[] left = CreateDigits(wordCount, seed: 17);
-        uint[] right = CreateDigits(wordCount, seed: 29);
+        uint[] left = CreateDigits(wordCount, 17);
+        uint[] right = CreateDigits(wordCount, 29);
 
         Measure(output, "Simple", new SimpleMultiplier(), left, right);
         Measure(output, "Karatsuba", new KaratsubaMultiplier(), left, right);
@@ -32,15 +36,21 @@ public static class MultiplierPerformanceDemo
 
     private static uint[] CreateDigits(int count, int seed)
     {
-        Random random = new(seed);
+        Random random = new Random(seed);
         uint[] digits = new uint[count];
 
         for (int i = 0; i < digits.Length; i++)
         {
-            digits[i] = (uint)random.NextInt64(1, uint.MaxValue);
+            uint high = (uint)random.Next(0, 65536);
+            uint low = (uint)random.Next(0, 65536);
+            digits[i] = (high << 16) | low;
+            if (digits[i] == 0)
+            {
+                digits[i] = 1;
+            }
         }
 
-        digits[^1] |= 1;
+        digits[digits.Length - 1] |= 1;
         return digits;
     }
 }

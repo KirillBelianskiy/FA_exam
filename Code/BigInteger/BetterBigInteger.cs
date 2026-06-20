@@ -22,20 +22,31 @@ public sealed class BetterBigInteger
 
     public BetterBigInteger(uint[] digits, bool isNegative)
     {
-        ArgumentNullException.ThrowIfNull(digits);
+        if (digits == null)
+        {
+            throw new ArgumentNullException(nameof(digits));
+        }
+
         SetMagnitude((uint[])digits.Clone(), isNegative);
     }
 
     public BetterBigInteger(IEnumerable<uint> digits, bool isNegative)
     {
-        ArgumentNullException.ThrowIfNull(digits);
+        if (digits == null)
+        {
+            throw new ArgumentNullException(nameof(digits));
+        }
+
         SetMagnitude(digits.ToArray(), isNegative);
     }
 
     public BetterBigInteger(string value, int radix)
     {
         ValidateRadix(radix);
-        ArgumentNullException.ThrowIfNull(value);
+        if (value == null)
+        {
+            throw new ArgumentNullException(nameof(value));
+        }
 
         string trimmed = value.Trim();
         if (trimmed.Length == 0)
@@ -57,7 +68,7 @@ public sealed class BetterBigInteger
             throw new FormatException("The value does not contain digits.");
         }
 
-        uint[] magnitude = [0];
+        uint[] magnitude = new uint[] { 0 };
 
         for (; index < trimmed.Length; index++)
         {
@@ -78,11 +89,17 @@ public sealed class BetterBigInteger
         SetMagnitude(magnitude, signBit != 0);
     }
 
-    public bool IsNegative => _signBit != 0;
+    public bool IsNegative
+    {
+        get
+        {
+            return _signBit != 0;
+        }
+    }
 
     public ReadOnlySpan<uint> GetDigits()
     {
-        if (_data is not null)
+        if (_data != null)
         {
             return _data;
         }
@@ -100,7 +117,7 @@ public sealed class BetterBigInteger
         }
 
         uint[] current = ToMagnitudeArray();
-        StringBuilder builder = new();
+        StringBuilder builder = new StringBuilder();
 
         while (!IsZeroMagnitude(current))
         {
@@ -124,7 +141,7 @@ public sealed class BetterBigInteger
 
     public int CompareTo(BetterBigInteger? other)
     {
-        if (other is null)
+        if (ReferenceEquals(other, null))
         {
             return 1;
         }
@@ -140,7 +157,7 @@ public sealed class BetterBigInteger
 
     public bool Equals(BetterBigInteger? other)
     {
-        if (other is null)
+        if (ReferenceEquals(other, null))
         {
             return false;
         }
@@ -150,21 +167,22 @@ public sealed class BetterBigInteger
 
     public override bool Equals(object? obj)
     {
-        return obj is BetterBigInteger other && Equals(other);
+        BetterBigInteger? other = obj as BetterBigInteger;
+        return other != null && Equals(other);
     }
 
     public override int GetHashCode()
     {
-        HashCode hash = new();
-        hash.Add(_signBit);
+        int hash = 17;
+        hash = hash * 31 + _signBit;
 
         ReadOnlySpan<uint> digits = GetDigits();
         for (int i = 0; i < digits.Length; i++)
         {
-            hash.Add(digits[i]);
+            hash = hash * 31 + digits[i].GetHashCode();
         }
 
-        return hash.ToHashCode();
+        return hash;
     }
 
     public static bool operator ==(BetterBigInteger? left, BetterBigInteger? right)
@@ -174,7 +192,7 @@ public sealed class BetterBigInteger
             return true;
         }
 
-        if (left is null || right is null)
+        if (ReferenceEquals(left, null) || ReferenceEquals(right, null))
         {
             return false;
         }
@@ -189,36 +207,36 @@ public sealed class BetterBigInteger
 
     public static bool operator <(BetterBigInteger left, BetterBigInteger right)
     {
-        ArgumentNullException.ThrowIfNull(left);
-        ArgumentNullException.ThrowIfNull(right);
+        ValidateOperand(left, nameof(left));
+        ValidateOperand(right, nameof(right));
         return left.CompareTo(right) < 0;
     }
 
     public static bool operator >(BetterBigInteger left, BetterBigInteger right)
     {
-        ArgumentNullException.ThrowIfNull(left);
-        ArgumentNullException.ThrowIfNull(right);
+        ValidateOperand(left, nameof(left));
+        ValidateOperand(right, nameof(right));
         return left.CompareTo(right) > 0;
     }
 
     public static bool operator <=(BetterBigInteger left, BetterBigInteger right)
     {
-        ArgumentNullException.ThrowIfNull(left);
-        ArgumentNullException.ThrowIfNull(right);
+        ValidateOperand(left, nameof(left));
+        ValidateOperand(right, nameof(right));
         return left.CompareTo(right) <= 0;
     }
 
     public static bool operator >=(BetterBigInteger left, BetterBigInteger right)
     {
-        ArgumentNullException.ThrowIfNull(left);
-        ArgumentNullException.ThrowIfNull(right);
+        ValidateOperand(left, nameof(left));
+        ValidateOperand(right, nameof(right));
         return left.CompareTo(right) >= 0;
     }
 
     public static BetterBigInteger operator +(BetterBigInteger left, BetterBigInteger right)
     {
-        ArgumentNullException.ThrowIfNull(left);
-        ArgumentNullException.ThrowIfNull(right);
+        ValidateOperand(left, nameof(left));
+        ValidateOperand(right, nameof(right));
 
         if (left._signBit == right._signBit)
         {
@@ -241,14 +259,14 @@ public sealed class BetterBigInteger
 
     public static BetterBigInteger operator -(BetterBigInteger left, BetterBigInteger right)
     {
-        ArgumentNullException.ThrowIfNull(left);
-        ArgumentNullException.ThrowIfNull(right);
+        ValidateOperand(left, nameof(left));
+        ValidateOperand(right, nameof(right));
         return left + (-right);
     }
 
     public static BetterBigInteger operator -(BetterBigInteger value)
     {
-        ArgumentNullException.ThrowIfNull(value);
+        ValidateOperand(value, nameof(value));
 
         if (value.IsZero)
         {
@@ -260,8 +278,8 @@ public sealed class BetterBigInteger
 
     public static BetterBigInteger operator *(BetterBigInteger left, BetterBigInteger right)
     {
-        ArgumentNullException.ThrowIfNull(left);
-        ArgumentNullException.ThrowIfNull(right);
+        ValidateOperand(left, nameof(left));
+        ValidateOperand(right, nameof(right));
 
         if (left.IsZero || right.IsZero)
         {
@@ -278,25 +296,29 @@ public sealed class BetterBigInteger
 
     public static BetterBigInteger operator /(BetterBigInteger left, BetterBigInteger right)
     {
-        ArgumentNullException.ThrowIfNull(left);
-        ArgumentNullException.ThrowIfNull(right);
+        ValidateOperand(left, nameof(left));
+        ValidateOperand(right, nameof(right));
 
-        DivRem(left, right, out BetterBigInteger quotient, out _);
+        BetterBigInteger quotient;
+        BetterBigInteger remainder;
+        DivRem(left, right, out quotient, out remainder);
         return quotient;
     }
 
     public static BetterBigInteger operator %(BetterBigInteger left, BetterBigInteger right)
     {
-        ArgumentNullException.ThrowIfNull(left);
-        ArgumentNullException.ThrowIfNull(right);
+        ValidateOperand(left, nameof(left));
+        ValidateOperand(right, nameof(right));
 
-        DivRem(left, right, out _, out BetterBigInteger remainder);
+        BetterBigInteger quotient;
+        BetterBigInteger remainder;
+        DivRem(left, right, out quotient, out remainder);
         return remainder;
     }
 
     public static BetterBigInteger operator ~(BetterBigInteger value)
     {
-        ArgumentNullException.ThrowIfNull(value);
+        ValidateOperand(value, nameof(value));
 
         int length = value.GetSignedWordLength() + 1;
         uint[] words = value.ToTwosComplement(length);
@@ -311,22 +333,22 @@ public sealed class BetterBigInteger
 
     public static BetterBigInteger operator &(BetterBigInteger left, BetterBigInteger right)
     {
-        return ApplyBitwise(left, right, static (a, b) => a & b);
+        return ApplyBitwise(left, right, '&');
     }
 
     public static BetterBigInteger operator |(BetterBigInteger left, BetterBigInteger right)
     {
-        return ApplyBitwise(left, right, static (a, b) => a | b);
+        return ApplyBitwise(left, right, '|');
     }
 
     public static BetterBigInteger operator ^(BetterBigInteger left, BetterBigInteger right)
     {
-        return ApplyBitwise(left, right, static (a, b) => a ^ b);
+        return ApplyBitwise(left, right, '^');
     }
 
     public static BetterBigInteger operator <<(BetterBigInteger value, int shift)
     {
-        ArgumentNullException.ThrowIfNull(value);
+        ValidateOperand(value, nameof(value));
         if (shift < 0)
         {
             throw new ArgumentOutOfRangeException(nameof(shift));
@@ -342,7 +364,7 @@ public sealed class BetterBigInteger
 
     public static BetterBigInteger operator >>(BetterBigInteger value, int shift)
     {
-        ArgumentNullException.ThrowIfNull(value);
+        ValidateOperand(value, nameof(value));
         if (shift < 0)
         {
             throw new ArgumentOutOfRangeException(nameof(shift));
@@ -353,7 +375,8 @@ public sealed class BetterBigInteger
             return FromMagnitude(value.ToMagnitudeArray(), value._signBit);
         }
 
-        uint[] quotient = ShiftRightMagnitude(value.GetDigits(), shift, out bool hasRemainder);
+        bool hasRemainder;
+        uint[] quotient = ShiftRightMagnitude(value.GetDigits(), shift, out hasRemainder);
 
         if (value.IsNegative && hasRemainder)
         {
@@ -363,16 +386,30 @@ public sealed class BetterBigInteger
         return FromMagnitude(quotient, value._signBit);
     }
 
-    private bool IsZero => _data is null && _smallValue == 0;
+    private bool IsZero
+    {
+        get
+        {
+            return _data == null && _smallValue == 0;
+        }
+    }
 
     private static BetterBigInteger Zero()
     {
-        return new BetterBigInteger([0], signBit: 0);
+        return new BetterBigInteger(new uint[] { 0 }, signBit: 0);
     }
 
     private static BetterBigInteger FromMagnitude(uint[] magnitude, int signBit)
     {
         return new BetterBigInteger(magnitude, signBit);
+    }
+
+    private static void ValidateOperand(BetterBigInteger? value, string parameterName)
+    {
+        if (ReferenceEquals(value, null))
+        {
+            throw new ArgumentNullException(parameterName);
+        }
     }
 
     private void SetMagnitude(uint[] digits, bool isNegative)
@@ -402,12 +439,12 @@ public sealed class BetterBigInteger
 
     private uint[] ToMagnitudeArray()
     {
-        if (_data is not null)
+        if (_data != null)
         {
             return (uint[])_data.Clone();
         }
 
-        return [_smallValue];
+        return new uint[] { _smallValue };
     }
 
     private static IMultiplier SelectMultiplier(int wordCount)
@@ -432,7 +469,9 @@ public sealed class BetterBigInteger
             throw new DivideByZeroException();
         }
 
-        DivRemMagnitude(left.GetDigits(), right.GetDigits(), out uint[] quotientMagnitude, out uint[] remainderMagnitude);
+        uint[] quotientMagnitude;
+        uint[] remainderMagnitude;
+        DivRemMagnitude(left.GetDigits(), right.GetDigits(), out quotientMagnitude, out remainderMagnitude);
 
         quotient = FromMagnitude(quotientMagnitude, left._signBit ^ right._signBit);
         remainder = FromMagnitude(remainderMagnitude, left._signBit);
@@ -455,28 +494,29 @@ public sealed class BetterBigInteger
         int comparison = CompareMagnitude(dividend, divisor);
         if (comparison < 0)
         {
-            quotient = [0];
+            quotient = new uint[] { 0 };
             remainder = dividend.ToArray();
             return;
         }
 
         if (comparison == 0)
         {
-            quotient = [1];
-            remainder = [0];
+            quotient = new uint[] { 1 };
+            remainder = new uint[] { 0 };
             return;
         }
 
         if (divisor.Length == 1)
         {
-            quotient = DivideMagnitudeByUInt(dividend.ToArray(), divisor[0], out uint rem);
-            remainder = [rem];
+            uint rem;
+            quotient = DivideMagnitudeByUInt(dividend.ToArray(), divisor[0], out rem);
+            remainder = new uint[] { rem };
             return;
         }
 
         int bitLength = GetBitLength(dividend);
         quotient = new uint[(bitLength + 31) / 32];
-        uint[] currentRemainder = [0];
+        uint[] currentRemainder = new uint[] { 0 };
 
         // Binary long division is slower than Knuth division, but compact and dependable.
         for (int bit = bitLength - 1; bit >= 0; bit--)
@@ -498,10 +538,10 @@ public sealed class BetterBigInteger
         remainder = TrimMagnitude(currentRemainder);
     }
 
-    private static BetterBigInteger ApplyBitwise(BetterBigInteger left, BetterBigInteger right, Func<uint, uint, uint> operation)
+    private static BetterBigInteger ApplyBitwise(BetterBigInteger left, BetterBigInteger right, char operation)
     {
-        ArgumentNullException.ThrowIfNull(left);
-        ArgumentNullException.ThrowIfNull(right);
+        ValidateOperand(left, nameof(left));
+        ValidateOperand(right, nameof(right));
 
         int length = Math.Max(left.GetSignedWordLength(), right.GetSignedWordLength()) + 1;
         uint[] leftWords = left.ToTwosComplement(length);
@@ -510,7 +550,18 @@ public sealed class BetterBigInteger
 
         for (int i = 0; i < result.Length; i++)
         {
-            result[i] = operation(leftWords[i], rightWords[i]);
+            if (operation == '&')
+            {
+                result[i] = leftWords[i] & rightWords[i];
+            }
+            else if (operation == '|')
+            {
+                result[i] = leftWords[i] | rightWords[i];
+            }
+            else
+            {
+                result[i] = leftWords[i] ^ rightWords[i];
+            }
         }
 
         return FromTwosComplement(result);
@@ -521,7 +572,7 @@ public sealed class BetterBigInteger
         ReadOnlySpan<uint> digits = GetDigits();
         int length = digits.Length;
 
-        if (!IsNegative && (digits[^1] & 0x80000000) != 0)
+        if (!IsNegative && (digits[digits.Length - 1] & 0x80000000) != 0)
         {
             length++;
         }
@@ -573,7 +624,7 @@ public sealed class BetterBigInteger
             return Zero();
         }
 
-        bool isNegative = (words[^1] & 0x80000000) != 0;
+        bool isNegative = (words[words.Length - 1] & 0x80000000) != 0;
         uint[] magnitude = (uint[])words.Clone();
 
         if (!isNegative)
@@ -652,7 +703,7 @@ public sealed class BetterBigInteger
         uint[] result = value.ToArray();
         if (result.Length == 0)
         {
-            result = [0];
+            result = new uint[] { 0 };
         }
 
         ulong carry = addend;
@@ -669,7 +720,7 @@ public sealed class BetterBigInteger
         if (carry != 0)
         {
             Array.Resize(ref result, result.Length + 1);
-            result[^1] = (uint)carry;
+            result[result.Length - 1] = (uint)carry;
         }
 
         return TrimMagnitude(result);
@@ -704,7 +755,7 @@ public sealed class BetterBigInteger
     {
         if (multiplier == 0 || IsZeroMagnitude(value))
         {
-            return [0];
+            return new uint[] { 0 };
         }
 
         uint[] result = new uint[value.Length + 1];
@@ -784,7 +835,7 @@ public sealed class BetterBigInteger
         if (wordShift >= value.Length)
         {
             hasRemainder = !IsZeroMagnitude(value);
-            return [0];
+            return new uint[] { 0 };
         }
 
         for (int i = 0; i < wordShift; i++)
@@ -830,7 +881,7 @@ public sealed class BetterBigInteger
     {
         if (digits.Length == 0)
         {
-            return [0];
+            return new uint[] { 0 };
         }
 
         int length = digits.Length;
@@ -857,7 +908,7 @@ public sealed class BetterBigInteger
             length--;
         }
 
-        return digits[..length];
+        return digits.Slice(0, length);
     }
 
     private static bool IsZeroMagnitude(ReadOnlySpan<uint> digits)
@@ -874,7 +925,7 @@ public sealed class BetterBigInteger
             return 0;
         }
 
-        uint top = value[^1];
+        uint top = value[value.Length - 1];
         int bits = (value.Length - 1) * 32;
 
         while (top != 0)
@@ -932,7 +983,9 @@ public sealed class BetterBigInteger
     {
         for (int i = 0, j = builder.Length - 1; i < j; i++, j--)
         {
-            (builder[i], builder[j]) = (builder[j], builder[i]);
+            char temp = builder[i];
+            builder[i] = builder[j];
+            builder[j] = temp;
         }
     }
 }

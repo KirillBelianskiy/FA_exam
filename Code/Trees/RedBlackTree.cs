@@ -20,7 +20,10 @@ public class RedBlackTree<TKey, TValue>
 
     public override bool Remove(TKey key)
     {
-        ArgumentNullException.ThrowIfNull(key);
+        if (key is null)
+        {
+            throw new ArgumentNullException(nameof(key));
+        }
 
         RedBlackTreeNode<TKey, TValue>? node = FindNode(key, out RedBlackTreeNode<TKey, TValue>? lastVisited);
         if (node is null)
@@ -80,7 +83,18 @@ public class RedBlackTree<TKey, TValue>
         node.Parent = null;
         Count--;
 
-        UpdateUpwards(fixParent ?? fixNode ?? Root);
+        RedBlackTreeNode<TKey, TValue>? updateStart = fixParent;
+        if (updateStart is null)
+        {
+            updateStart = fixNode;
+        }
+
+        if (updateStart is null)
+        {
+            updateStart = Root;
+        }
+
+        UpdateUpwards(updateStart);
 
         if (originalColor == RedBlackColor.Black)
         {
@@ -188,8 +202,8 @@ public class RedBlackTree<TKey, TValue>
                     sibling = currentParent.Right;
                 }
 
-                if (ColorOf(sibling?.Left) == RedBlackColor.Black &&
-                    ColorOf(sibling?.Right) == RedBlackColor.Black)
+                if (LeftColorOf(sibling) == RedBlackColor.Black &&
+                    RightColorOf(sibling) == RedBlackColor.Black)
                 {
                     if (sibling is not null)
                     {
@@ -201,9 +215,9 @@ public class RedBlackTree<TKey, TValue>
                 }
                 else
                 {
-                    if (ColorOf(sibling?.Right) == RedBlackColor.Black)
+                    if (RightColorOf(sibling) == RedBlackColor.Black)
                     {
-                        if (sibling?.Left is not null)
+                        if (sibling is not null && sibling.Left is not null)
                         {
                             sibling.Left.Color = RedBlackColor.Black;
                         }
@@ -224,7 +238,7 @@ public class RedBlackTree<TKey, TValue>
 
                     currentParent.Color = RedBlackColor.Black;
 
-                    if (sibling?.Right is not null)
+                    if (sibling is not null && sibling.Right is not null)
                     {
                         sibling.Right.Color = RedBlackColor.Black;
                     }
@@ -246,8 +260,8 @@ public class RedBlackTree<TKey, TValue>
                     sibling = currentParent.Left;
                 }
 
-                if (ColorOf(sibling?.Right) == RedBlackColor.Black &&
-                    ColorOf(sibling?.Left) == RedBlackColor.Black)
+                if (RightColorOf(sibling) == RedBlackColor.Black &&
+                    LeftColorOf(sibling) == RedBlackColor.Black)
                 {
                     if (sibling is not null)
                     {
@@ -259,9 +273,9 @@ public class RedBlackTree<TKey, TValue>
                 }
                 else
                 {
-                    if (ColorOf(sibling?.Left) == RedBlackColor.Black)
+                    if (LeftColorOf(sibling) == RedBlackColor.Black)
                     {
-                        if (sibling?.Right is not null)
+                        if (sibling is not null && sibling.Right is not null)
                         {
                             sibling.Right.Color = RedBlackColor.Black;
                         }
@@ -282,7 +296,7 @@ public class RedBlackTree<TKey, TValue>
 
                     currentParent.Color = RedBlackColor.Black;
 
-                    if (sibling?.Left is not null)
+                    if (sibling is not null && sibling.Left is not null)
                     {
                         sibling.Left.Color = RedBlackColor.Black;
                     }
@@ -302,6 +316,31 @@ public class RedBlackTree<TKey, TValue>
 
     private static RedBlackColor ColorOf(RedBlackTreeNode<TKey, TValue>? node)
     {
-        return node?.Color ?? RedBlackColor.Black;
+        if (node is null)
+        {
+            return RedBlackColor.Black;
+        }
+
+        return node.Color;
+    }
+
+    private static RedBlackColor LeftColorOf(RedBlackTreeNode<TKey, TValue>? node)
+    {
+        if (node is null)
+        {
+            return RedBlackColor.Black;
+        }
+
+        return ColorOf(node.Left);
+    }
+
+    private static RedBlackColor RightColorOf(RedBlackTreeNode<TKey, TValue>? node)
+    {
+        if (node is null)
+        {
+            return RedBlackColor.Black;
+        }
+
+        return ColorOf(node.Right);
     }
 }
