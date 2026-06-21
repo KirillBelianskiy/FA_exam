@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 430" width="940" height="430" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 460" width="940" height="460" role="img" aria-labelledby="title desc">
   <title id="title">Red-Black delete fixup — ближний племянник красный</title>
   <desc id="desc">Случай двойной черноты: брат черный, ближний ребенок брата красный, дальний черный. Сначала поворот у брата.</desc>
   <defs>
@@ -7,7 +7,7 @@
       <path d="M0,0 L10,4 L0,8 Z" fill="#111"/>
     </marker>
   </defs>
-  <rect width="940" height="430" fill="#fff"/>
+  <rect width="940" height="460" fill="#fff"/>
   <style>
     .line{stroke:#111;stroke-width:2.2;fill:none;stroke-linecap:round;stroke-linejoin:round}
     .red{fill:#d62828;stroke:#111;stroke-width:2.2}
@@ -35,9 +35,11 @@
   <line class="line" x1="705" y1="82" x2="605" y2="150"/>
   <line class="line" x1="705" y1="82" x2="805" y2="150"/>
   <line class="line" x1="805" y1="195" x2="855" y2="255"/>
+  <line class="line" x1="855" y1="297" x2="895" y2="335"/>
   <circle class="black" cx="705" cy="70" r="24"/><text class="white" x="705" y="70">P</text>
   <circle class="db" cx="605" cy="175" r="24"/><text x="605" y="175">X</text>
   <circle class="black" cx="805" cy="175" r="24"/><text class="white" x="805" y="175">A</text>
   <circle class="red" cx="855" cy="275" r="22"/><text class="white" x="855" y="275">S</text>
-  <text class="greenText" x="705" y="345">Случай превращается в случай с дальним красным ребенком</text>
+  <circle class="black" cx="895" cy="355" r="21"/><text class="white" x="895" y="355">B</text>
+  <text class="greenText" x="705" y="415">Случай превращается в случай с дальним красным ребенком</text>
 </svg>

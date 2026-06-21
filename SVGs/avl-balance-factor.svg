@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 370" width="720" height="370" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 390" width="720" height="390" role="img" aria-labelledby="title desc">
   <title id="title">AVL balance factor — фактор баланса</title>
   <desc id="desc">Учебная схема: AVL balance factor — фактор баланса</desc>
   <defs>
@@ -7,7 +7,7 @@
       <path d="M0,0 L10,4 L0,8 Z" fill="#111"/>
     </marker>
   </defs>
-  <rect x="0" y="0" width="720" height="370" fill="#fff"/>
+  <rect x="0" y="0" width="720" height="390" fill="#fff"/>
   <style>
     .line{stroke:#111;stroke-width:2.2;fill:none;stroke-linecap:round;stroke-linejoin:round}
     .dash{stroke:#555;stroke-width:2;fill:none;stroke-dasharray:5 5}
