@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 360" width="760" height="360" role="img" aria-labelledby="title desc">
+  <title id="title">Red-Black insert — черный родитель</title>
+  <desc id="desc">Новая красная вершина добавлена под черным родителем, свойства красно-черного дерева не нарушены.</desc>
+  <rect width="760" height="360" fill="#fff"/>
+  <style>
+    .line{stroke:#111;stroke-width:2.2;fill:none;stroke-linecap:round}
+    .red{fill:#d62828;stroke:#111;stroke-width:2.2}
+    .black{fill:#111;stroke:#111;stroke-width:2.2}
+    text{font-family:Arial, Helvetica, sans-serif;font-size:18px;fill:#111;text-anchor:middle;dominant-baseline:middle}
+    .title{font-size:21px;font-weight:700}
+    .small{font-size:15px}
+    .white{fill:#fff}
+    .ok{fill:#147a2e;font-weight:700}
+  </style>
+  <text class="title" x="380" y="34">Вставка: родитель черный</text>
+  <line class="line" x1="380" y1="92" x2="260" y2="165"/>
+  <line class="line" x1="380" y1="92" x2="500" y2="165"/>
+  <line class="line" x1="260" y1="210" x2="190" y2="270"/>
+  <circle class="black" cx="380" cy="80" r="25"/>
+  <text class="white" x="380" y="80">G</text>
+  <circle class="black" cx="260" cy="190" r="25"/>
+  <text class="white" x="260" y="190">P</text>
+  <circle class="black" cx="500" cy="190" r="25"/>
+  <text class="white" x="500" y="190">U</text>
+  <circle class="red" cx="190" cy="290" r="25"/>
+  <text class="white" x="190" y="290">N</text>
+  <text class="ok" x="380" y="320">P черный: красно-черные свойства сохранены</text>
+  <text class="small" x="190" y="250">новая вершина красная</text>
+</svg>

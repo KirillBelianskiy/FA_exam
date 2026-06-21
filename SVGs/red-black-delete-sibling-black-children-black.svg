@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 400" width="880" height="400" role="img" aria-labelledby="title desc">
+  <title id="title">Red-Black delete fixup — черный брат и черные дети</title>
+  <desc id="desc">Случай двойной черноты: брат черный и оба его ребенка черные. Брат красится в красный, двойная чернота поднимается к родителю.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#111"/>
+    </marker>
+  </defs>
+  <rect width="880" height="400" fill="#fff"/>
+  <style>
+    .line{stroke:#111;stroke-width:2.2;fill:none;stroke-linecap:round}
+    .red{fill:#d62828;stroke:#111;stroke-width:2.2}
+    .black{fill:#111;stroke:#111;stroke-width:2.2}
+    .db{fill:#fff;stroke:#111;stroke-width:4}
+    text{font-family:Arial, Helvetica, sans-serif;font-size:18px;fill:#111;text-anchor:middle;dominant-baseline:middle}
+    .title{font-size:20px;font-weight:700}
+    .white{fill:#fff}
+    .greenText{fill:#147a2e;font-weight:700}
+  </style>
+  <text class="title" x="220" y="28">До: S черный, дети S черные</text>
+  <text class="title" x="660" y="28">После: S красный, проблема выше</text>
+  <line class="line" x1="220" y1="82" x2="120" y2="150"/>
+  <line class="line" x1="220" y1="82" x2="320" y2="150"/>
+  <line class="line" x1="320" y1="195" x2="270" y2="255"/>
+  <line class="line" x1="320" y1="195" x2="370" y2="255"/>
+  <circle class="black" cx="220" cy="70" r="24"/><text class="white" x="220" y="70">P</text>
+  <circle class="db" cx="120" cy="175" r="24"/><text x="120" y="175">X</text>
+  <circle class="black" cx="320" cy="175" r="24"/><text class="white" x="320" y="175">S</text>
+  <circle class="black" cx="270" cy="275" r="22"/><text class="white" x="270" y="275">A</text>
+  <circle class="black" cx="370" cy="275" r="22"/><text class="white" x="370" y="275">B</text>
+  <path class="line" d="M 405 190 C 475 140, 535 140, 595 175" marker-end="url(#arrow)"/>
+  <line class="line" x1="660" y1="82" x2="560" y2="150"/>
+  <line class="line" x1="660" y1="82" x2="760" y2="150"/>
+  <line class="line" x1="760" y1="195" x2="710" y2="255"/>
+  <line class="line" x1="760" y1="195" x2="810" y2="255"/>
+  <circle class="db" cx="660" cy="70" r="24"/><text x="660" y="70">P</text>
+  <circle class="black" cx="560" cy="175" r="24"/><text class="white" x="560" y="175">X</text>
+  <circle class="red" cx="760" cy="175" r="24"/><text class="white" x="760" y="175">S</text>
+  <circle class="black" cx="710" cy="275" r="22"/><text class="white" x="710" y="275">A</text>
+  <circle class="black" cx="810" cy="275" r="22"/><text class="white" x="810" y="275">B</text>
+  <text class="greenText" x="440" y="355">Если P был красным, его можно просто перекрасить в черный</text>
+</svg>

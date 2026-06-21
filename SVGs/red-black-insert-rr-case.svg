@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 430" width="900" height="430" role="img" aria-labelledby="title desc">
+  <title id="title">Red-Black insert — RR case</title>
+  <desc id="desc">Черный дядя, новая вершина в правом поддереве правого родителя: левый поворот вокруг деда и перекраска.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#111"/>
+    </marker>
+  </defs>
+  <rect width="900" height="430" fill="#fff"/>
+  <style>
+    .line{stroke:#111;stroke-width:2.2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+    .red{fill:#d62828;stroke:#111;stroke-width:2.2}
+    .black{fill:#111;stroke:#111;stroke-width:2.2}
+    text{font-family:Arial, Helvetica, sans-serif;font-size:18px;fill:#111;text-anchor:middle;dominant-baseline:middle}
+    .title{font-size:20px;font-weight:700}
+    .small{font-size:14px}
+    .white{fill:#fff}
+    .redText{fill:#b00020;font-weight:700}
+    .greenText{fill:#147a2e;font-weight:700}
+  </style>
+  <text class="title" x="225" y="28">До: дядя черный, линия RR</text>
+  <text class="title" x="675" y="28">После: левый поворот + перекраска</text>
+  <line class="line" x1="225" y1="82" x2="125" y2="150"/>
+  <line class="line" x1="225" y1="82" x2="325" y2="150"/>
+  <line class="line" x1="325" y1="195" x2="375" y2="255"/>
+  <circle class="black" cx="225" cy="70" r="24"/>
+  <text class="white" x="225" y="70">G</text>
+  <circle class="black" cx="125" cy="175" r="24"/>
+  <text class="white" x="125" y="175">U</text>
+  <circle class="red" cx="325" cy="175" r="24"/>
+  <text class="white" x="325" y="175">P</text>
+  <circle class="red" cx="375" cy="275" r="24"/>
+  <text class="white" x="375" y="275">N</text>
+  <text class="redText" x="225" y="330">N и P красные: нужен левый поворот(G)</text>
+  <path class="line" d="M 405 180 C 475 120, 535 120, 605 168" marker-end="url(#arrow)"/>
+  <text class="small" x="500" y="112">rotate left</text>
+  <line class="line" x1="675" y1="82" x2="575" y2="150"/>
+  <line class="line" x1="675" y1="82" x2="775" y2="150"/>
+  <circle class="black" cx="675" cy="70" r="24"/>
+  <text class="white" x="675" y="70">P</text>
+  <circle class="red" cx="575" cy="175" r="24"/>
+  <text class="white" x="575" y="175">G</text>
+  <circle class="red" cx="775" cy="175" r="24"/>
+  <text class="white" x="775" y="175">N</text>
+  <text class="greenText" x="675" y="330">P стал черным корнем поддерева, G стал красным</text>
+</svg>
